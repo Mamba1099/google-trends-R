@@ -18,6 +18,10 @@ cd renv
 ```R
 Rscript activate.R
 ```
+move out of that directory after successfully activating renv
+```R
+cd ..
+```
 
 ## Dependencies
 This project requires the following R packages:
@@ -33,4 +37,14 @@ source("install_packages.R")
 load the packages into your R studio
 ```R
 source("load_packages.R")
+```
+
+## run the project
+ensure that your are in the path
+cd/path/to/your_project.
+the path will depend on the you have named your project or the directory you are working on.
+it's not supposed to be same as mine.
+in order to run the project, run the following commands in your terminal
+```R
+Rscript main.R
 ```
