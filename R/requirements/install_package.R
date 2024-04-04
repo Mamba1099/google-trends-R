@@ -1,0 +1,9 @@
+# install required packages
+install.packages("tidyverse")
+install.packages("knitr")
+install.packages("tinytex")
+install.packages("moderndive")
+install.packages("fivethirtyeight")
+install.packages("httr")
+install.packages("httpuv")
+install.packages("gtrendsR")
