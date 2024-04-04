@@ -1,4 +1,2 @@
 # move to project file
-```R
-cd R
-```
+click the R folder
