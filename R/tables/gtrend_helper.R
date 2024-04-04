@@ -2,13 +2,12 @@
 library(gtrendsR)
 
 # Define global parameters
-sports_keywords <- c("NHL",   # National Hockey League in North America
-                     "NBA",   # National Basketball Association in North America
-                     "MLB",   # Major League Baseball in North America
-                     "MLS"    # Major League Soccer in North America
+                     sports_keywords <- 
+                       c("NHL",   # National Hockey League in North America
+                         "NBA",   # National Basketball Association in North America
+                         "MLB",   # Major League Baseball in North America
+                         "MLS"    # Major League Soccer in North America
                      )
-                     
-                     
                      technology_keywords <-
                        c("iPhone",
                          "Android",
