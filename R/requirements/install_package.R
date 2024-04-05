@@ -12,7 +12,6 @@ packages_to_install <- c(
   "fivethirtyeight",
   "httr",
   "httpuv",
-  "gtrendsR"
 )
 
 # Install packages
