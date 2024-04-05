@@ -370,16 +370,34 @@ details.</p>
 <p>3.move out of that directory after successfully activating renv</p>
 <pre class="r"><code>cd ..</code></pre>
 </div>
-<div id="dependencies" class="section level2">
-<h2>Dependencies</h2>
+<div id="install-dependencies-by-running-the-scripts-with-the-required-packages" class="section level2">
+<h2>install Dependencies by running the scripts with the required
+packages</h2>
 <p>This project requires the following R packages:</p>
 </div>
 <div id="open-r-in-terminal" class="section level2">
 <h2>open R in terminal</h2>
 <p>install required packages</p>
-<pre class="r"><code>Rscript requirements/install_package.R</code></pre>
+<pre class="r"><code>Rscript install_package.R</code></pre>
 <p>load the packages into your R studio</p>
-<pre class="r"><code>Rscript requirements/load_packages.R</code></pre>
+<pre class="r"><code>Rscript load_packages.R</code></pre>
+</div>
+<div id="install-dependencies-using-virtual-environment" class="section level2">
+<h2>install dependencies using virtual environment</h2>
+<p>ensure that you do this in your work directory 1. Launch R in your
+terminal by typing R in your terminal 2. load the renv package</p>
+<pre class="r"><code>library(renv)</code></pre>
+<p>3.initialize the environment in your work directory</p>
+<pre class="r"><code>renv::init()</code></pre>
+<p>4.activate your environment</p>
+<pre class="r"><code>renv::activate()</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>renv::install() this will update and install the required packages
+in the renv.lock</li>
+</ol>
+<pre class="r"><code>renv::install()</code></pre>
+<p>or</p>
+<pre class="r"><code>renv::snapshot()</code></pre>
 </div>
 <div id="run-the-app" class="section level2">
 <h2>run the app</h2>

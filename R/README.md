@@ -26,20 +26,44 @@ Rscript activate.R
 cd ..
 ```
 
-## Dependencies
+## install Dependencies by running the scripts with the required packages
 This project requires the following R packages:
 
 ## open R in terminal
  install required packages
 
 ```R
-Rscript requirements/install_package.R
+Rscript install_package.R
 ```
 
 load the packages into your R studio
 
 ```R
-Rscript requirements/load_packages.R
+Rscript load_packages.R
+```
+
+## install dependencies using virtual environment
+ensure that you do this in your work directory
+1. Launch R in your terminal by typing R in your terminal
+2. load the renv package
+```R
+library(renv)
+```
+3.initialize the environment in your work directory
+```R
+renv::init()
+```
+4.activate your environment
+```R
+renv::activate()
+```
+5. renv::install() this will update and install the required packages in the renv.lock
+```R
+renv::install()
+```
+or
+```R
+renv::snapshot()
 ```
 
 ## run the app
