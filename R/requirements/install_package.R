@@ -1,6 +1,15 @@
-# install required packages
 
-# Install required packages
+install_required_packages <- function(packages) {
+  installed_packages <- rownames(installed.packages())
+
+  packages_to_install <- packages[!(packages %in% installed_packages)]
+  
+  if (length(packages_to_install) > 0) {
+    install.packages(packages_to_install)
+  }
+}
+
+# List of required packages
 packages_to_install <- c(
   "tidyverse",
   "knitr",
@@ -12,7 +21,8 @@ packages_to_install <- c(
   "fivethirtyeight",
   "httr",
   "httpuv",
+  "openxlsx"
 )
 
-# Install packages
-install.packages(packages_to_install)
+# Call the function to install required packages
+install_required_packages(packages_to_install)
