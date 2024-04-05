@@ -15,10 +15,13 @@ https://github.com/Mamba1099/google-trends-R.git
 ```R
 cd renv
 ```
+
 ```R
 Rscript activate.R
 ```
-move out of that directory after successfully activating renv
+
+3.move out of that directory after successfully activating renv
+
 ```R
 cd ..
 ```
@@ -31,12 +34,17 @@ type R in the terminal
 ```R
 R
 ```
+
+ install required packages
+
 ```R
-source("install_packages.R")
+source("C:/Users/mamba/google-trends-R/R/requirements/install_package.R")
 ```
+
 load the packages into your R studio
+
 ```R
-source("load_packages.R")
+source("C:/Users/mamba/google-trends-R/R/requirements/load_packages.R")`
 ```
 
 ## run the project
