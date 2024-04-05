@@ -30,29 +30,28 @@ cd ..
 This project requires the following R packages:
 
 ## open R in terminal
-type R in the terminal
-```R
-R
-```
-
  install required packages
 
 ```R
-source("C:/Users/mamba/google-trends-R/R/requirements/install_package.R")
+Rscript requirements/install_package.R
 ```
 
 load the packages into your R studio
 
 ```R
-source("C:/Users/mamba/google-trends-R/R/requirements/load_packages.R")`
+Rscript requirements/load_packages.R
 ```
 
-## run the project
+## run the app
 ensure that your are in the path
 cd/path/to/your_project.
 the path will depend on the you have named your project or the directory you are working on.
 it's not supposed to be same as mine.
 in order to run the project, run the following commands in your terminal
 ```R
-Rscript main.R
+Rscript app.R
+```
+follow the link to view the app
+```R
+http://127.0.0.1:6152
 ```
