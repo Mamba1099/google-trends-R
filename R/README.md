@@ -65,6 +65,10 @@ or
 ```R
 renv::snapshot()
 ```
+6.Load the package
+```R
+renv::load()
+```
 
 ## run the app
 ensure that your are in the path
