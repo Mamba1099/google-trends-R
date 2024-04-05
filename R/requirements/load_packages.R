@@ -10,6 +10,5 @@ loading_packages <- function() {
   library(styler)
   library(shiny)
   library(httpuv)
-  library(gtrendsR)
 }
 loading_packages()
