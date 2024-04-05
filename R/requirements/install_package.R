@@ -1,10 +1,19 @@
 # install required packages
-install.packages("tidyverse")
-install.packages("knitr")
-install.packages("tinytex")
-install.packages("moderndive")
-install.packages("styler")
-install.packages("fivethirtyeight")
-install.packages("httr")
-install.packages("httpuv")
-install.packages("gtrendsR")
+
+# Install required packages
+packages_to_install <- c(
+  "tidyverse",
+  "knitr",
+  "tinytex",
+  "moderndive",
+  "shiny",
+  "styler",
+  "utils",
+  "fivethirtyeight",
+  "httr",
+  "httpuv",
+  "gtrendsR"
+)
+
+# Install packages
+install.packages(packages_to_install)
