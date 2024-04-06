@@ -1,0 +1,18 @@
+# Load the fivethirtyeight package
+library(fivethirtyeight)
+
+# Access the mediacloud_hurricanes dataset
+tv_hurricane_by_network_data <- fivethirtyeight::tv_hurricanes_by_network
+
+# Render the dataset as a formatted table using knitr::kable()
+formatted_table <- knitr::kable(tv_hurricane_by_network_data)
+
+# Print the formatted table
+print(formatted_table)
+
+# Write the formatted table to a CSV file
+write.csv(
+  formatted_table,
+  "C:/Users/mamba/google-trends-R/R/csv/tv_hurricane_by_network_data.csv",
+  row.names = FALSE
+)
