@@ -16,6 +16,7 @@ packages_to_install <- c(
   "tinytex",
   "officer",
   "moderndive",
+  "reshape2",
   "shiny",
   "styler",
   "utils",
