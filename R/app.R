@@ -1,42 +1,61 @@
 library(shiny)
-library(ggplot2)
 
 # Define UI
 ui <- fluidPage(
-  
   titlePanel("Google Trends Analysis"),
   
   sidebarLayout(
     sidebarPanel(
-      selectInput("variable", "Choose a variable:",
-                  choices = c("Sepal Length" = "Sepal.Length", 
-                              "Sepal Width" = "Sepal.Width",
-                              "Petal Length" = "Petal.Length",
-                              "Petal Width" = "Petal.Width")),
-      sliderInput("n", "Number of observations:",
-                  min = 10, max = 100, value = 50)
+      selectInput(
+        "plot_type",
+        "Choose a plot type:",
+        choices = c("line", "bar", "histogram", "boxplot")
+      ),
+      conditionalPanel(
+        condition = "input.plot_type == 'histogram'",
+        sliderInput(
+          "bins",
+          "Number of bins:",
+          min = 1,
+          max = 50,
+          value = 10
+        )
+      ),
+      conditionalPanel(
+        condition = "input.plot_type == 'bar' || input.plot_type == 'boxplot'",
+        textOutput("settings_info")
+      )
     ),
-    mainPanel(
-      plotOutput("plot")
-    )
+    mainPanel(plotOutput("plot"))
   )
 )
 
 # Define server logic
 server <- function(input, output) {
-  
-  # Generate random data based on user input
-  data <- reactive({
-    iris[sample(nrow(iris), input$n), ]
+  # Render settings information based on plot type
+  output$settings_info <- renderText({
+    if (input$plot_type == "bar") {
+      "Settings for bar graph..."
+    } else if (input$plot_type == "boxplot") {
+      "Settings for boxplot..."
+    } else {
+      ""
+    }
   })
   
-  # Render plot based on selected variable
+  # Generate plot based on user input
   output$plot <- renderPlot({
-    ggplot(data(), aes_string(x = input$variable)) +
-      geom_histogram(fill = "blue", color = "black") +
-      labs(title = paste("Histogram of", input$variable))
+    # Plot based on user input
+    if (input$plot_type == "line") {
+      # Code to generate line plot
+    } else if (input$plot_type == "bar") {
+      # Code to generate bar plot
+    } else if (input$plot_type == "histogram") {
+      # Code to generate histogram plot
+    } else if (input$plot_type == "boxplot") {
+      # Code to generate boxplot
+    }
   })
-  
 }
 
 # Run the application
