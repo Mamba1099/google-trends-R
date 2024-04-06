@@ -14,6 +14,7 @@ packages_to_install <- c(
   "tidyverse",
   "knitr",
   "tinytex",
+  "officer",
   "moderndive",
   "shiny",
   "styler",
