@@ -352,9 +352,65 @@ display: none;
 </div>
 
 
-<div id="move-to-project-file" class="section level1">
-<h1>move to project file</h1>
-<p>click the R folder</p>
+<div id="google-trends-readme" class="section level1">
+<h1>GOOGLE TRENDS README</h1>
+<p>This is the README file for my project. It provides information about
+the project, its purpose, how to use it, and any other relevant
+details.</p>
+<div id="getting-started" class="section level2">
+<h2>Getting Started</h2>
+<p>To get started with this project, follow these steps:</p>
+<ol style="list-style-type: decimal">
+<li>Clone the repository.</li>
+</ol>
+<pre class="r"><code>https://github.com/Mamba1099/google-trends-R.git</code></pre>
+<p>2.Activate virtual environment</p>
+<pre class="r"><code>cd renv</code></pre>
+<pre class="r"><code>Rscript activate.R</code></pre>
+<p>3.move out of that directory after successfully activating renv</p>
+<pre class="r"><code>cd ..</code></pre>
+</div>
+<div id="install-dependencies-by-running-the-scripts-with-the-required-packages" class="section level2">
+<h2>install Dependencies by running the scripts with the required
+packages</h2>
+<p>This project requires the following R packages:</p>
+</div>
+<div id="open-r-in-terminal" class="section level2">
+<h2>open R in terminal</h2>
+<p>install required packages</p>
+<pre class="r"><code>Rscript install_package.R</code></pre>
+<p>load the packages into your R studio</p>
+<pre class="r"><code>Rscript load_packages.R</code></pre>
+</div>
+<div id="install-dependencies-using-virtual-environment" class="section level2">
+<h2>install dependencies using virtual environment</h2>
+<p>ensure that you do this in your work directory 1. Launch R in your
+terminal by typing R in your terminal 2. load the renv package</p>
+<pre class="r"><code>library(renv)</code></pre>
+<p>3.initialize the environment in your work directory</p>
+<pre class="r"><code>renv::init()</code></pre>
+<p>4.activate your environment</p>
+<pre class="r"><code>renv::activate()</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>renv::install() this will update and install the required packages
+in the renv.lock</li>
+</ol>
+<pre class="r"><code>renv::install()</code></pre>
+<p>or</p>
+<pre class="r"><code>renv::snapshot()</code></pre>
+<p>6.Load the package</p>
+<pre class="r"><code>renv::load()</code></pre>
+</div>
+<div id="run-the-app" class="section level2">
+<h2>run the app</h2>
+<p>ensure that your are in the path cd/path/to/your_project. the path
+will depend on the you have named your project or the directory you are
+working on. it’s not supposed to be same as mine. in order to run the
+project, run the following commands in your terminal</p>
+<pre class="r"><code>Rscript app.R</code></pre>
+<p>follow the link to view the app</p>
+<pre class="r"><code>http://127.0.0.1:6152</code></pre>
+</div>
 </div>
 
 
