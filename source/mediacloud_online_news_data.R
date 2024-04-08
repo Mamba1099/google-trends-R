@@ -1,12 +1,13 @@
+
 # Load the fivethirtyeight package
 library(fivethirtyeight)
 
 # Access the mediacloud_hurricanes dataset
-tv_hurricane_by_network_data <- fivethirtyeight::tv_hurricanes_by_network
+mediacloud_online_news_data <- fivethirtyeight::mediacloud_online_news
 
 # Write the formatted table to a CSV file
 write.csv(
-  tv_hurricane_by_network_data,
-  "C:/Users/mamba/google-trends-R/csv/tv_hurricane_by_network_data.csv",
+  mediacloud_online_news_data,
+  "C:/Users/mamba/google-trends-R/csv/mediacloud_online_news_data.csv",
   row.names = FALSE
 )
