@@ -28,4 +28,3 @@ packages_to_install <- c(
 
 # Call the function to install required packages
 install_required_packages(packages_to_install)
-
