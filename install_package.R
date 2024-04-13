@@ -13,17 +13,13 @@ install_required_packages <- function(packages) {
 packages_to_install <- c(
   "tidyverse",
   "knitr",
-  "tinytex",
-  "officer",
   "moderndive",
   "reshape2",
   "shiny",
   "styler",
   "utils",
   "fivethirtyeight",
-  "httr",
-  "httpuv",
-  "openxlsx"
+
 )
 
 # Call the function to install required packages
