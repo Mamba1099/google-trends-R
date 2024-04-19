@@ -27,9 +27,7 @@ ui <- fluidPage(
           "Histogram / Bar Graph",
           "Column Distribution",
           "Correlation Matrix",
-          "Scatter Matrix",
-          "Line Chart",
-          "Time Series Plot"
+          "Scatter Matrix"
         ),
         selected = "Histogram / Bar Graph"
       ),
@@ -56,7 +54,20 @@ ui <- fluidPage(
       div(style = "font-size: 30px; animation: rainbow-glow 2s infinite; margin-top: -50px;",
           textOutput("scatter_warning"),
           textOutput("correlation_warning")
-          )
+          ),
+      div(
+        textOutput("report_section"),
+        style = "
+          margin-top: 30px; 
+          border: 2px solid black;
+          width: 610px;
+          padding: 10px;
+          height: 500px;
+          border-radius: 6px;
+          margin-left: -640px;
+          margin-top: -500px;
+        "
+      )
     )
   ),
   tags$style(
@@ -116,7 +127,7 @@ server <- function(input, output, session) {
       p <- ggplot(melted_data, aes(x = date, y = value, fill = as.factor(variable))) +
         geom_bar(width = input$bin_width, stat = "identity",) +
         facet_wrap(~ variable, scales = "free") +
-        theme(axis.text.x = element_text(angle = 80, vjust = 0.8, hjust = 1)) +
+        theme(axis.text.x = element_text(angle = 50, vjust = 0.5, hjust = 1)) +
         labs(fill = "Variable")
       
       print(p)
@@ -139,6 +150,9 @@ server <- function(input, output, session) {
       }
 
     } else if (input$plot_type == "Scatter Matrix") {
+      if (input$data_type == "tv by hurricane by network") {
+        return (paste("Scatter Matrix cannot be plotted for this data"))
+      }
       # Plot scatter matrix for numeric variables
       numeric_data <- subset(data, select = -c(date))
       plots <- vector("list", length = ncol(numeric_data) ^ 2)
@@ -153,16 +167,6 @@ server <- function(input, output, session) {
           theme_minimal()
       }
       gridExtra::grid.arrange(grobs = plots, ncols = ncol(numeric_data))
-    } else if (input$plot_type == "Time Series Plot") {
-      ggplot(data, aes_string(x = "date", y = input$data_type)) +
-        geom_line(color = "yellow") +
-        labs(title = "Times Series Plot", x = "Date", y = input$data_type) +
-        theme_minimal()
-    } else if (input$plot_type == "Line Chart") {
-      ggplot(data, aes_string(x = "date", y = input$data_type)) +
-        geom_line(color = "blue") +
-        labs(title = "Line Chart", x = "Date", y = input$data_type) +
-        theme_minimal()
     }
   })
   
@@ -177,6 +181,18 @@ output$correlation_warning <- renderText({
       (input$data_type == "tv hurricane by network")) {
     "Correlation matrix cannot be plotted for this data"
   }
+})
+output$report_section <- renderText({
+  req(input$data_type, input$plot_type)
+  
+  report <- ""
+    
+    if (input$data_type == "google trends") {
+      if (input$plot_type == "Histogram / Bar Graph") {
+        report <- "This is the report for google trends histogram"
+      }
+    }
+  return(report)
 })
 }
 
