@@ -16,9 +16,10 @@ packages_to_install <- c(
   "moderndive",
   "reshape2",
   "shiny",
+  "tinytex",
   "styler",
   "utils",
-  "fivethirtyeight",
+  "fivethirtyeight"
 
 )
 
