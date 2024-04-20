@@ -79,7 +79,7 @@ in order to run the project, run the following commands in your terminal
 ```R
 Rscript app.R
 ```
-follow the link to view the app
+or
 ```R
-http://127.0.0.1:6152
+press Run App
 ```
