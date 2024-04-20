@@ -90,7 +90,6 @@ ui <- fluidPage(
   )
 )
 # Define server logic
-# Define server logic
 server <- function(input, output, session) {
   observe({
     updateSliderInput(session, "bin_width", value = input$bin_width)
@@ -128,7 +127,7 @@ server <- function(input, output, session) {
           fill = as.factor(variable)
         )) +
         geom_bar(width = input$bin_width, stat = "identity") +
-        facet_wrap( ~ variable, scales = "free") +
+        facet_wrap(~ variable, scales = "free") +
         theme(axis.text.x = element_text(
           angle = 50,
           vjust = 0.5,
@@ -140,8 +139,8 @@ server <- function(input, output, session) {
     } else if (input$plot_type == "Column Distribution") {
       melted_data <- melt(data)
       ggplot(melted_data, aes(value)) +
-        geom_histogram(binwidth = input$bin_width) +
-        facet_wrap( ~ variable, scales = "free")
+        geom_histogram(binwidth = c(input$bin_width)) +
+        facet_wrap(~ variable, scales = "free")
     } else if (input$plot_type == "Correlation Matrix") {
       if (input$data_type == "tv hurricane by network") {
         return(NULL)
@@ -278,7 +277,7 @@ server <- function(input, output, session) {
           - **Patterns**: Identify any consistent patterns or associations between specific hurricanes and their media attention.<br>
           - **Implications**: Understand how the media coverage of one hurricane may influence or coincide with the coverage of another.<br></br>
           For example:<br></br>
-          - A strong positive correlation between Hurricane Irma and Hurricane Jose suggests that they often receive similar levels of media attention or are covered together in news reports.<br>
+          - A strong positive correlation between Hurricane Irma and Hurricane Jose suggests that they often receive similar levels of media attention or are covered together in news reports.<br></br>
           - A weaker correlation between Hurricane Harvey and the other hurricanes might indicate independent or less synchronized media coverage patterns.<br></br>
           The correlation matrix helps identify relationships and patterns in media coverage, providing insights into how different hurricanes are portrayed in the media and their potential interconnections."
           )
@@ -290,54 +289,124 @@ server <- function(input, output, session) {
       if (input$plot_type == "Histogram / Bar Graph") {
         div(
           HTML(
-            "HISTOGRAM: <br></br>
-          Harvey: <br></br>
-          Histogram for Hurricane Harvey suggests a sluggish boom in TV coverage starting from late August 2017, attaining its top round overdue August to early September.
-          This spike in coverage possibly corresponds to the peak depth of the hurricane. <br></br>
-          After the peak, TV coverage gradually decreases but remains considerable till mid-September before declining in addition. <br></br>
-          Irma: <br></br>
-          Hurricane Irma's TV insurance follows a comparable sample to Harvey, with a terrific boom in coverage starting from overdue August to early September 2017. <br></br>
-          Unlike Harvey, Irma's coverage continues a exceedingly excessive level at some stage in mid-September, indicating sustained media interest. <br></br>
-          Maria: <br></br>
-          The histogram for Hurricane Maria indicates a one-of-a-kind trend in comparison to Harvey and Irma. TV insurance for Maria stays fantastically low in the course of the observed duration, with occasional spikes but no sustained boom in insurance. <br></br>
-          This decrease stage of insurance indicates that Maria might not have acquired as a good deal media interest as Harvey and Irma for the duration of the same timeframe. <br></br>
-          Jose: <br></br>
-          Hurricane Jose's TV insurance is minimal compared to the alternative hurricanes, with sporadic spikes indicating quick periods of multiplied insurance. <br></br>
-           overall insurance for Jose remains low in the course of the found length, indicating that it did now not entice as a whole lot media attention as Harvey and Irma."
+            "
+            HISTOGRAM: <br></br>
+            Harvey: <br></br>
+            Histogram for Hurricane Harvey suggests a sluggish boom in TV coverage starting from late August 2017, attaining its top round overdue August to early September.
+            This spike in coverage possibly corresponds to the peak depth of the hurricane. <br></br>
+            After the peak, TV coverage gradually decreases but remains considerable till mid-September before declining in addition. <br></br>
+            Irma: <br></br>
+            Hurricane Irma's TV insurance follows a comparable sample to Harvey, with a terrific boom in coverage starting from overdue August to early September 2017. <br></br>
+            Unlike Harvey, Irma's coverage continues a exceedingly excessive level at some stage in mid-September, indicating sustained media interest. <br></br>
+            Maria: <br></br>
+            The histogram for Hurricane Maria indicates a one-of-a-kind trend in comparison to Harvey and Irma. TV insurance for Maria stays fantastically low in the course of the observed duration, with occasional spikes but no sustained boom in insurance. <br></br>
+            This decrease stage of insurance indicates that Maria might not have acquired as a good deal media interest as Harvey and Irma for the duration of the same timeframe. <br></br>
+            Jose: <br></br>
+            Hurricane Jose's TV insurance is minimal compared to the alternative hurricanes, with sporadic spikes indicating quick periods of multiplied insurance. <br></br>
+             overall insurance for Jose remains low in the course of the found length, indicating that it did now not entice as a whole lot media attention as Harvey and Irma."
           )
         )
       } else if (input$plot_type == "Column Distribution") {
         div(
           HTML(
-            "COLUMN DISTRIBUTION: <br></br>
-          Column distribution plots provide insights into the distribution of typhoon-related TV coverage across different dates. <br></br>
-          By inspecting the distribution of TV coverage for each typhoon kind over the years, we can become aware of temporal developments and patterns in media coverage. <br></br>
-          Temporal Patterns: <br></br>
-          The column distribution plots reveal temporal trends in TV coverage, with awesome spikes corresponding to full-size occasions or periods of heightened media attention. <br></br>
-          Outliers: <br></br>
-          Anomalies or outliers within the statistics may suggest notable occasions or reporting discrepancies that warrant in addition investigation. <br></br>
-          Long-term Trends: <br></br>
-          Assessing lengthy-term tendencies in TV coverage can provide precious insights into how media attention to hurricanes evolves over time."
+            "
+            COLUMN DISTRIBUTION: <br></br>
+            Column distribution plots provide insights into the distribution of typhoon-related TV coverage across different dates. <br></br>
+            By inspecting the distribution of TV coverage for each typhoon kind over the years, we can become aware of temporal developments and patterns in media coverage. <br></br>
+            Temporal Patterns: <br></br>
+            The column distribution plots reveal temporal trends in TV coverage, with awesome spikes corresponding to full-size occasions or periods of heightened media attention. <br></br>
+            Outliers: <br></br>
+            Anomalies or outliers within the statistics may suggest notable occasions or reporting discrepancies that warrant in addition investigation. <br></br>
+            Long-term Trends: <br></br>
+            Assessing lengthy-term tendencies in TV coverage can provide precious insights into how media attention to hurricanes evolves over time."
           )
         )
       } else if (input$plot_type == "Correlation Matrix") {
         div(
           HTML(
-            "CORRELATION MATRIX: <br></br>
-          The correlation matrix quantifies the connection between pairs of hurricane-associated TV coverage. <br></br>
-          By analyzing the correlation coefficients, we can decide the electricity and path of the connection among different hurricanes in phrases of media insurance. <br></br>
-          Strength of Relationship: <br></br>
-          Strong tremendous correlations between sure typhoon pairs indicate that they often get hold of similar ranges of TV coverage or are covered together in information reports. <br></br>
-          Patterns: <br></br>
-          Identifying steady patterns or institutions among specific hurricanes and their TV coverage can offer insights into media reporting dynamics. <br></br>
-          Implications: <br></br>
-          Understanding how the TV coverage of one typhoon might also influence or coincide with the coverage of some other can shed light on media narratives and public perceptions of typhoon occasions."
+            "
+            CORRELATION MATRIX: <br></br>
+            The correlation matrix quantifies the connection between pairs of hurricane-associated TV coverage. <br></br>
+            By analyzing the correlation coefficients, we can decide the electricity and path of the connection among different hurricanes in phrases of media insurance. <br></br>
+            Strength of Relationship: <br></br>
+            Strong tremendous correlations between sure typhoon pairs indicate that they often get hold of similar ranges of TV coverage or are covered together in information reports. <br></br>
+            Patterns: <br></br>
+            Identifying steady patterns or institutions among specific hurricanes and their TV coverage can offer insights into media reporting dynamics. <br></br>
+            Implications: <br></br>
+            Understanding how the TV coverage of one typhoon might also influence or coincide with the coverage of some other can shed light on media narratives and public perceptions of typhoon occasions.<br></br>
+            "
           )
         )
       } else if (input$plot_type == "Scatter Matrix") {
         div(HTML("No data for this data type"))
       }
-    }
-  })
+    } else if (input$data_type == "mediacloud state") {
+      if (input$plot_type == "Histogram / Bar Graph") {
+        div(
+          HTML(
+            "
+            tISTOGRAMr <br>e            Frequency Distribution:
+            - The y-axis represents the frequency of media insurance, at the same time as the x-axis suggests the variety of dates. <br></br>
+            Skewness: <br>
+            - We can discover any skewness in the distribution, which would possibly suggest durations of heightened media interest to hurricanes. <br>
+            - Ug facet allows us to parent differences in the frequency and depth of media insurance throughout exceptional time durations.
+E by comparing the histogramx <br>a            - Wtudy various levels of media insurance for hurricanes in Texas, Puerto Rico, and Florida over the years. H from the histogramur<br>
+            - ricane Harvey in Texas obtained tremendous media interest round late August to early September, i <br>
+           dicated through spikes in insurance. In <br>
+            - evaluation, Hurricane Maria in Puerto Rico had especially low media coverage typical, with occasional spikes but no sustained increase. Hur<br>
+            - ricane Irma in Florida had a greater consistent sample with peaks in mid-September, suggesting sustained media interest throughout that duration.
+   <br>          "
+          )
+        )
+      }
+   else if (input$plot_type == "Column Distribution") {
+        div(
+          HTML(
+            "
+            COLUMN DISTRIBUTIONe <br></br>m            Temporal Patterns:  <br></br>
+            The column distribution plots monitor temporal developments in media insurance, with significant spikes similar to principal activities or durations of heightened media interest.  <br></br>
+            Outliers:  <br></br>
+            Anomalies or outliers inside the facts can also indicate big occasions or reporting discrepancies.  <br></br>
+            Long-term Trends:  <br></br>
+            Assessing long-term developments in media insurance presents insights into how media attention to hurricanes evolves through the years.  <br></br>
+            inspecting the distribution of media coverage for each storm kind over the years, we can identify temporal styles and outliers in media coverage. Sig <br></br>
+            nificant spikes in coverage correspond to major activities or periods of heightened media attention, which includes hurricanes making landfall or full-size trends inside the aftermath.
+            "
+          )
+        )
+      }  } else if (input$plot_type == "Correlation Matrix") {
+        div(
+          HTML(
+            "
+            CORRELATION MATRIX: <br></br>
+            ength of Relationship: The <br></br>
+             correlation matrix quantifies the power and path of the relationship between distinct hurricanes in phrases of media coverage.
+Pa  <br></br>t            Patterns:  <br></br>
+            Identifying consistent patterns or institutions among unique hurricanes and their media interest presents insights into media reporting dynamics.  <br></br>
+            Implications:  <br></br>
+            Understanding how the media coverage of one storm may have an impact on or coincide with the insurance of every other sheds mild on media narratives and public perceptions of hurricane occasions.  <br></br>
+             correlation matrix allows perceive relationships and patterns in media insurance, supplying insights into how one-of-a-kind hurricanes are portrayed within the media and their ability interconnections. Str <br></br>
+            ong positive correlations between positive storm pairs indicate they often get hold of comparable degrees of media coverage or are protected collectively in news reviews.
+            "
+          )
+        )
+      }
+   else if (input$plot_type == "Scatter Matrix") {
+        div(
+          HTML(
+            "
+            tCATTER MATRIXi <br></br>v            Bivariate Relationships: <br></br>
+            The scatter matrix lets in us to assess the bivariate relationships among media coverage of various hurricanes. <br></br>
+            Trends: <br></br>
+            Identifying tendencies or patterns inside the courting between media insurance of hurricanes over time enables understand media dynamics. <br></br>
+            Outliers: <br></br>
+            Detecting outliers or unusual occurrences in media coverage may additionally warrant in addition research. <br></br>
+            mple Analysis: Sca<br></br>
+            tter plots between one-of-a-kind hurricanes display clusters of points indicating periods of synchronized media coverage or lack thereof. Exa<br></br>
+            mining the diagonal of the scatter matrix permits visualization of the distribution of media insurance for every hurricane in my view, identifying any outliers or severe values.
+            "
+          )
+        )
+      }})
 }
 shinyApp(ui = ui, server = server)
