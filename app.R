@@ -35,14 +35,14 @@ ui <- fluidPage(
         "Select Bin Width",
         min = 1,
         max = 100,
-        value = 10
+        value = 1
       ),
       sliderInput(
         "num_bins",
         "Number of bins",
         min = 1,
         max = 50,
-        value = 20
+        value = 4
       )
     ),
     mainPanel(
@@ -50,17 +50,16 @@ ui <- fluidPage(
         plotOutput("plot", width = "100%", height = "850px"),
         tags$style(type = "text/css", "#plot {margin-bottom: 50px}")
       ),
+      div(style = "font-size: 30px; animation: rainbow-glow 2s infinite; margin-top: -50px;",
+          textOutput("scatter_warning"), ),
       div(
-        style = "font-size: 30px; animation: rainbow-glow 2s infinite; margin-top: -50px;",
-        textOutput("scatter_warning"),
-      ),
-      div(
-        textOutput("report_section"),
+        uiOutput("report_section"),
         style = "
           margin-top: 30px;
           border: 2px solid black;
           width: 610px;
           padding: 10px;
+          overflow-y: auto;
           height: 480px;
           border-radius: 6px;
           margin-left: -640px;
@@ -181,155 +180,160 @@ server <- function(input, output, session) {
       "Scatter Matrix cannot be plotted for this data"
     }
   })
-  output$report_section <- renderText({
-    req(input$data_type, input$plot_type)
-    
-    report <- ""
-    
+  output$report_section <- renderUI({
     if (input$data_type == "google trends") {
       if (input$plot_type == "Histogram / Bar Graph") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Histogram / Bar Graph.")
-      } else if (input$plot_type == "Column Distribution") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Column Distribution.")
-      } else if (input$plot_type == "Correlation Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Correlation Matrix.")
-      } else if (input$plot_type == "Scatter Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Scatter Matrix.")
-      }
-    }
-    if (input$data_type == "mediacloud hurricanes") {
-      if (input$plot_type == "Histogram / Bar Graph") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Histogram / Bar Graph.")
-      } else if (input$plot_type == "Column Distribution") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Column Distribution.")
-      } else if (input$plot_type == "Correlation Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Correlation Matrix.")
-      } else if (input$plot_type == "Scatter Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Scatter Matrix.")
-      }
-    }
-    if (input$data_type == "mediacloud state") {
-      if (input$plot_type == "Histogram / Bar Graph") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Histogram / Bar Graph.")
-      } else if (input$plot_type == "Column Distribution") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Column Distribution.")
-      } else if (input$plot_type == "Correlation Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Correlation Matrix.")
-      } else if (input$plot_type == "Scatter Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Scatter Matrix.")
-      }
-    }
-    if (input$data_type == "mediacloud trump") {
-      if (input$plot_type == "Histogram / Bar Graph") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Histogram / Bar Graph.
-                ",
-                )
-      } else if (input$plot_type == "Column Distribution") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Column Distribution.")
-      } else if (input$plot_type == "Correlation Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Correlation Matrix.")
-      } else if (input$plot_type == "Scatter Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Scatter Matrix.")
-      }
-    }
-    if (input$data_type == "tv hurricanes") {
-      if (input$plot_type == "Histogram / Bar Graph") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Histogram / Bar Graph.")
-      } else if (input$plot_type == "Column Distribution") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Column Distribution.")
-      } else if (input$plot_type == "Correlation Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Correlation Matrix.")
-      } else if (input$plot_type == "Scatter Matrix") {
-        report <-
-          paste("There is no report for",
-                input$data_type,
-                "with Scatter Matrix since it can't be plotted.")
-      }
-    }
-    if (input$data_type == "tv state") {
-      if (input$plot_type == "Histogram / Bar Graph") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Histogram / Bar Graph.")
-      } else if (input$plot_type == "Column Distribution") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Column Distribution.")
-      } else if (input$plot_type == "Correlation Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Correlation Matrix.")
-      } else if (input$plot_type == "Scatter Matrix") {
-        report <-
-          paste("This is the report for",
-                input$data_type,
-                "with Scatter Matrix.")
-      }
-    }
-    
-    return(report)
-  })
-}
+        div(
+          HTML(
+            "
+          HISTOGRAM: <br></br>
 
+          Histograms offer a closer look at the distribution of hurricane occurrences over time. By examining the histograms for each hurricane type, we can observe: <br></br>
+
+          - **Frequency Distribution**: The y-axis represents the frequency of occurrences, while the x-axis indicates the range of dates. <br></br>
+          - **Skewness**: We can identify any skewness in the distribution, which might indicate periods of heightened hurricane activity. <br></br>
+          - **Comparison**: Comparing the histograms side by side allows us to discern differences in the frequency and intensity of hurricanes across different time periods. <br></br>
+
+          For example: <br></br>
+          - Hurricane Harvey: The histogram shows sporadic occurrences with a few spikes indicating periods of increased activity, such as around late August to early September. <br></br>
+          - Hurricane Irma: Exhibits a more consistent pattern with peaks in mid-September, suggesting sustained activity during that period. <br></br>
+          - Hurricane Maria: Shows relatively low occurrences overall, with occasional spikes in late September. <br></br>
+          - Hurricane Jose: Similar to Maria, with fewer occurrences compared to Harvey and Irma, and peaks in September. <br></br>
+        "
+          )
+        )
+      } else if (input$plot_type == "Column Distribution") {
+        div(
+          HTML(
+            "
+          COLUMN DISTRIBUTION: <br></br>
+
+          Column distribution plots offer insights into the distribution of hurricane occurrences across different dates. By examining the distribution of occurrences for each hurricane type over time, we can: <br></br>
+
+          - **Temporal Patterns**: Identify temporal trends and patterns in hurricane occurrences, such as seasonal variations or specific event-related spikes. <br></br>
+          - **Outliers**: Detect any outliers or anomalies in the data that might indicate exceptional weather events or reporting discrepancies. <br></br>
+          - **Long-term Trends**: Assess long-term trends in hurricane activity, which can inform predictive models and disaster preparedness efforts. <br></br>
+
+          For instance: <br></br>
+          - We might observe a clustering of high occurrences around certain dates, indicating the impact of specific weather events or seasonal trends. <br></br>
+          - Comparing the distributions across different hurricanes allows us to identify similarities or differences in their occurrence patterns. <br></br>
+        "
+          )
+        )
+      } else if (input$plot_type == "Correlation Matrix") {
+        div(
+          HTML(
+            "
+          CORRELATION MATRIX ANALYSIS: <br></br>
+
+          The correlation matrix quantifies the relationship between pairs of hurricane occurrences. By analyzing the correlation coefficients, we can: <br></br>
+
+          - **Strength of Relationship**: Determine the strength and direction of the relationship between different hurricane types. <br></br>
+          - **Patterns**: Identify any consistent patterns or associations between specific hurricanes. <br></br>
+          - **Implications**: Understand how the occurrence of one hurricane type may influence or coincide with the occurrence of another. <br></br>
+
+          For example: <br></br>
+          - A strong positive correlation between Hurricane Irma and Hurricane Jose suggests that they often occur together or in close temporal proximity. <br></br>
+          - A weaker correlation between Hurricane Harvey and the other hurricanes might indicate independent or less synchronized occurrence patterns. <br></br>
+        "
+          )
+        )
+      } else if (input$plot_type == "Scatter Matrix") {
+        div(
+          HTML(
+            "
+          SCATTER MATRIX ANALYSIS: <br></br>
+
+          The scatter matrix provides a visual representation of the relationship between pairs of hurricane occurrences. By examining the scatter plots, we can: <br></br>
+
+          - **Bivariate Relationships**: Assess the bivariate relationships between different hurricane types. <br></br>
+          - **Trends**: Identify any trends or patterns in the relationship between hurricane occurrences over time. <br></br>
+          - **Outliers**: Detect any outliers or unusual occurrences that may warrant further investigation. <br></br>
+
+          For instance:
+          - Scatter plots between Hurricane Irma and Hurricane Maria might reveal clusters of points indicating periods of synchronized activity or lack thereof. <br></br>
+          - Examining the diagonal of the scatter matrix allows us to visualize the distribution of each hurricane occurrence individually and identify any outliers or extreme values. <br></br>
+
+          By integrating these additional insights into the analysis, we can gain a more comprehensive understanding of the dynamics of hurricane occurrences, their interrelationships, and their implications for disaster management and resilience planning. <br></br>
+        "
+          )
+        )
+      }
+    } else if (input$data_type == "mediacloud hurricanes") {
+      if (input$plot_type == "Histogram / Bar Graph") {
+        div(
+          HTML(
+            "
+          ### Histogram:
+
+          Histograms offer a closer look at the distribution of hurricane-related media coverage over time. By examining the histograms for each hurricane type, we can observe:<br><br>
+          - **Frequency Distribution**: The y-axis represents the frequency of media coverage, while the x-axis indicates the range of dates.<br>
+          - **Skewness**: We can identify any skewness in the distribution, which might indicate periods of heightened media attention to hurricanes.<br>
+          - **Comparison**: Comparing the histograms side by side allows us to discern differences in the frequency and intensity of media coverage across different time periods.<br><br>
+          For example:<br>
+          - Hurricane Harvey: The histogram shows sporadic media coverage with a few spikes indicating periods of increased attention, such as around late August to early September.<br>
+          - Hurricane Irma: Exhibits a more consistent pattern with peaks in mid-September, suggesting sustained media attention during that period.<br>
+          - Hurricane Maria: Shows relatively low media coverage overall, with occasional spikes in late September.<br>
+          - Hurricane Jose: Similar to Maria, with fewer media coverage compared to Harvey and Irma, and peaks in September.<br><br>
+          The histogram provides insights into the temporal distribution of media coverage, highlighting periods of heightened attention and comparing the intensity of coverage across different hurricanes.
+        "
+          )
+        )
+      } else if (input$plot_type == "Column Distribution") {
+        div(
+          HTML(
+            "
+          ### Column Distribution:
+
+          Column distribution plots offer insights into the distribution of hurricane-related media coverage across different dates. By examining the distribution of media coverage for each hurricane type over time, we can:<br><br>
+          - **Temporal Patterns**: Identify temporal trends and patterns in media coverage of hurricanes, such as seasonal variations or specific event-related spikes.<br>
+          - **Outliers**: Detect any outliers or anomalies in the data that might indicate exceptional media attention or reporting discrepancies.<br>
+          - **Long-term Trends**: Assess long-term trends in media coverage of hurricanes, which can inform communication strategies and public awareness efforts.<br><br>
+          For instance:<br>
+          - We might observe a clustering of high media coverage around certain dates, indicating the impact of specific weather events or seasonal trends.<br>
+          - Comparing the distributions across different hurricanes allows us to identify similarities or differences in their media coverage patterns.<br><br>
+          The column distribution plot provides a comprehensive view of the temporal distribution of media coverage, revealing trends, outliers, and long-term patterns.
+        "
+          )
+        )
+      } else if (input$plot_type == "Correlation Matrix") {
+        div(
+          HTML(
+            "
+          ### Correlation Matrix:
+
+          The correlation matrix quantifies the relationship between pairs of hurricane-related media coverage. By analyzing the correlation coefficients, we can:<br><br>
+          - **Strength of Relationship**: Determine the strength and direction of the relationship between different hurricanes in terms of media coverage.<br>
+          - **Patterns**: Identify any consistent patterns or associations between specific hurricanes and their media attention.<br>
+          - **Implications**: Understand how the media coverage of one hurricane may influence or coincide with the coverage of another.<br><br>
+          For example:<br>
+          - A strong positive correlation between Hurricane Irma and Hurricane Jose suggests that they often receive similar levels of media attention or are covered together in news reports.<br>
+          - A weaker correlation between Hurricane Harvey and the other hurricanes might indicate independent or less synchronized media coverage patterns.<br><br>
+          The correlation matrix helps identify relationships and patterns in media coverage, providing insights into how different hurricanes are portrayed in the media and their potential interconnections.
+        "
+          )
+        )
+      } else if (input$plot_type == "Scatter Matrix") {
+        div(
+          HTML(
+            "
+          ### Scatter Matrix:
+
+          The scatter matrix provides a visual representation of the relationship between pairs of hurricane-related media coverage. By examining the scatter plots, we can:<br><br>
+          - **Bivariate Relationships**: Assess the bivariate relationships between media coverage of different hurricanes.<br>
+          - **Trends**: Identify any trends or patterns in the relationship between media coverage of hurricanes over time.<br>
+          - **Outliers**: Detect any outliers or unusual occurrences in media coverage that may warrant further investigation.<br><br>
+          For instance:<br>
+          - Scatter plots between Hurricane Irma and Hurricane Maria might reveal clusters of points indicating periods of synchronized media coverage or lack thereof.<br>
+          - Examining the diagonal of the scatter matrix allows us to visualize the distribution of media coverage for each hurricane individually and identify any outliers or extreme values.<br><br>
+          The scatter matrix offers a detailed view of the relationships and trends in media coverage, helping to uncover patterns and outliers that may not be immediately apparent from other analyses.
+        "
+          )
+        )
+      }
+    }
+  })
+  
+}
 # Run the application
 shinyApp(ui = ui, server = server)
