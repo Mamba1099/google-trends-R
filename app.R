@@ -280,7 +280,20 @@ server <- function(input, output, session) {
           )
         )
       } else if (input$plot_type == "Scatter Matrix") {
-        div(HTML("No data for this data type"))
+        div(HTML(
+          "
+          Bivariate Relationships: <br></br>
+          The scatter matrix provides a visible illustration of the bivariate relationships between pairs of hurricanes. Each scatter plot inside the matrix corresponds to a unique combination of hurricanes. For instance, one scatter plot may constitute the connection between Hurricane Harvey and Hurricane Irma, whilst any other may constitute the connection between Hurricane Maria and Hurricane Jose.
+          Strength of Relationship: <br></br>
+          By examining the scatter plots, we can determine the electricity and course of the relationship between unique pairs of hurricanes in terms of media insurance. A sturdy nice correlation in a scatter plot indicates that the media coverage of 1 storm tends to growth or lower in tandem with the insurance of any other hurricane. Conversely, a weak correlation shows that there may be very little constant relationship between the media insurance of the 2 hurricanes.
+          Patterns: <br></br>
+          The scatter matrix allows us identify any consistent patterns or associations among specific hurricanes in phrases of media coverage. Clusters or patterns of points in certain scatter plots may additionally imply intervals of synchronized media coverage or lack thereof for sure pairs of hurricanes. For example, if we examine a good cluster of points alongside a diagonal line in a scatter plot, it shows that the media insurance of each hurricane in that pair has a tendency to boom or decrease collectively over the years.
+          Outliers: <br></br>
+          Outliers in the scatter plots represent times of severe or unexpected media insurance for certain pairs of hurricanes. These outliers might also suggest enormous occasions or traits associated with the hurricanes that captured media attention to a more quantity than ordinary. By figuring out outliers, we can similarly look at the factors contributing to the unusual media insurance and investigate their effect on public notion and reaction to the hurricanes.
+          Temporal Trends: <br></br>
+          Analyzing the scatter matrix over the years lets in us to perceive temporal developments inside the courting between hurricane occurrences and media coverage. Patterns in the scatter plots can also reveal seasonal versions, cyclical styles, or different traits in media insurance for distinct pairs of hurricanes. Understanding those temporal developments can offer valuable insights into how media coverage of hurricanes evolves through the years and how it could affect public awareness and response.
+          "
+          ))
       }
     } else if (input$data_type == "tv hurricanes") {
       if (input$plot_type == "Histogram / Bar Graph") {
