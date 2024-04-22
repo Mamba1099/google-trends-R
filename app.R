@@ -140,12 +140,9 @@ server <- function(input, output, session) {
     } else if (input$plot_type == "Column Distribution") {
       melted_data <- melt(data)
       ggplot(melted_data, aes(value)) +
-        geom_histogram(binwidth = c(input$bin_width)) +
+        geom_histogram(binwidth = input$bin_width) +
         facet_wrap( ~ variable, scales = "free")
     } else if (input$plot_type == "Correlation Matrix") {
-      if (input$data_type == "tv hurricane by network") {
-        return(NULL)
-      } else {
         # Plot correlation matrix for numeric variables
         numeric_data <- subset(data, select = -c(date))
         corr_matrix <- cor(numeric_data)
@@ -153,7 +150,6 @@ server <- function(input, output, session) {
           geom_tile() +
           scale_fill_gradient(low = "purple4", high = "orange1") +
           theme_dark()
-      }
       
     } else if (input$plot_type == "Scatter Matrix") {
       # Plot scatter matrix for numeric variables
@@ -503,7 +499,7 @@ server <- function(input, output, session) {
             "
           )
         )
-      } else if (input$plot == "Correlation Matrix") {
+      } else if (input$plot_type == "Correlation Matrix") {
         div(
           HTML(
             "
